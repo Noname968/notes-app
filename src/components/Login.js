@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
+// import Alert from './Alert';
 
-
-const Login = () => {
+const Login = (props) => {
     const [details, setdetails] = useState({ email: "", password: "" });
     let history = useHistory();
     const onchange = (e) => {
@@ -23,10 +23,10 @@ const Login = () => {
             // Save the auth token and redirect
             localStorage.setItem('token', json.authtoken);
             history.push("/");
-
+            props.showalert("Login Successful...","success");
         }
         else {
-            alert("Invalid credentials");
+            props.showalert("Invalid credentials","danger");
         }
     
     })
@@ -35,13 +35,13 @@ return (
         <form onSubmit={handlesubmit}>
             <div className="mb-3">
                 <label htmlFor="email" className="form-label">Email address</label>
-                <input type="email" className="form-control" value={details.email} id="email" name='email' aria-describedby="emailHelp" onChange={onchange} />
+                <input type="email" className="form-control" value={details.email} id="email" name='email' autoComplete='off' aria-describedby="emailHelp" onChange={onchange} required />
             </div>
             <div className="mb-3">
                 <label htmlFor="password" className="form-label">Password</label>
-                <input type="password" className="form-control" value={details.password} id="password" name='password' onChange={onchange} />
+                <input type="password" className="form-control" value={details.password} id="password" name='password' autoComplete='off' onChange={onchange} minLength={7} required />
             </div>
-            <button type="submit" className="btn btn-primary" >Submit</button>
+            <button type="submit" className="btn btn-primary">Submit</button>
         </form>
     </div>
 )

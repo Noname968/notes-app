@@ -11,7 +11,7 @@ const secret='boyisgood'
 router.post('/cruser', [
     body('name', 'Enter a valid name').isLength({ min: 3 }),
     body('email', 'Enter a valid email').isEmail(),
-    body('password').isLength({ min: 3 }),
+    body('password').isLength({ min: 7 }),
 ], async (req, res) => {
     // if there are errors return bad req
     const errors = validationResult(req);
@@ -51,7 +51,7 @@ router.post('/cruser', [
 
 })
 
-// route-2
+// route-2 get data user
 router.post('/login', [
     body('email', 'Enter a valid email').isEmail(),
     body('password','Password cannot be blank').exists(),
